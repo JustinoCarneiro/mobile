@@ -1,33 +1,43 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { RootStackParamList } from './types';
-
-// Telas
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
-import HomeScreen from '../screens/HomeScreen';
+import ProviderHomeScreen from '../screens/ProviderHomeScreen';
+import ClientHomeScreen from '../screens/ClientHomeScreen';
 
-const Stack = createStackNavigator<RootStackParamList>();
+export type RootStackParamList = {
+  Login: undefined;
+  Register: { role?: 'client' | 'provider' };
+  ProviderHome: undefined;
+  ClientHome: undefined;
+};
 
-/**
- * AppNavigator Unificado.
- * Mantemos uma única árvore de navegação para evitar perda de contexto no Android.
- */
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
 export default function AppNavigator({ token }: { token: string | null }) {
+  // TODO: Implementar lógica real de verificação de papel (role) do usuário
+  const userRole = 'provider'; 
+
   return (
     <Stack.Navigator 
       screenOptions={{ 
         headerShown: false,
-        detachPreviousScreen: false 
+        animation: 'slide_from_right'
       }}
     >
-      {token === null ? (
-        <Stack.Group>
+      {!token ? (
+        <>
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
-        </Stack.Group>
+        </>
       ) : (
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <>
+          {userRole === 'provider' ? (
+            <Stack.Screen name="ProviderHome" component={ProviderHomeScreen} />
+          ) : (
+            <Stack.Screen name="ClientHome" component={ClientHomeScreen} />
+          )}
+        </>
       )}
     </Stack.Navigator>
   );
