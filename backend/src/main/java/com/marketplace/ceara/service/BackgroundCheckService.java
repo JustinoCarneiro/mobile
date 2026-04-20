@@ -1,6 +1,5 @@
 package com.marketplace.ceara.service;
 
-import com.marketplace.ceara.model.ProviderProfile;
 import com.marketplace.ceara.model.enums.VerificationStatus;
 import com.marketplace.ceara.repository.ProviderProfileRepository;
 import org.slf4j.Logger;
@@ -14,11 +13,13 @@ import java.util.UUID;
 /**
  * Serviço de Background Check simulado.
  *
- * O método runCheck é executado em uma Virtual Thread (configurada em AsyncConfig),
+ * O método runCheck é executado em uma Virtual Thread (configurada em
+ * AsyncConfig),
  * simulando uma chamada I/O bloqueante (ex: API externa de validação de CPF).
  *
  * Após os 5 segundos, o status do prestador é atualizado para APPROVED.
- * O @Transactional garante que a atualização seja commitada de forma independente
+ * O @Transactional garante que a atualização seja commitada de forma
+ * independente
  * da transação original de registro.
  */
 @Service
@@ -53,7 +54,6 @@ public class BackgroundCheckService {
                     providerProfileRepository.save(profile);
                     log.info("[BackgroundCheck] APPROVED para userId={}", userId);
                 },
-                () -> log.warn("[BackgroundCheck] Perfil não encontrado para userId={}", userId)
-        );
+                () -> log.warn("[BackgroundCheck] Perfil não encontrado para userId={}", userId));
     }
 }

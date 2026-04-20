@@ -3,7 +3,6 @@ package com.marketplace.ceara.service;
 import com.marketplace.ceara.model.ProviderProfile;
 import com.marketplace.ceara.model.Review;
 import com.marketplace.ceara.model.ServiceRequest;
-import com.marketplace.ceara.model.User;
 import com.marketplace.ceara.model.enums.ServiceRequestStatus;
 import com.marketplace.ceara.repository.ProviderProfileRepository;
 import com.marketplace.ceara.repository.ReviewRepository;
@@ -33,8 +32,8 @@ public class ReviewService {
     private final ProviderProfileRepository providerProfileRepository;
 
     public ReviewService(ReviewRepository reviewRepository,
-                         ServiceRequestRepository serviceRequestRepository,
-                         ProviderProfileRepository providerProfileRepository) {
+            ServiceRequestRepository serviceRequestRepository,
+            ProviderProfileRepository providerProfileRepository) {
         this.reviewRepository = reviewRepository;
         this.serviceRequestRepository = serviceRequestRepository;
         this.providerProfileRepository = providerProfileRepository;
@@ -45,7 +44,8 @@ public class ReviewService {
      */
     @Transactional
     public Review createReview(UUID serviceRequestId, UUID clientId, Integer rating, String comment) {
-        log.info("Iniciando criação de review: serviceRequestId={}, clientId={}, rating={}", serviceRequestId, clientId, rating);
+        log.info("Iniciando criação de review: serviceRequestId={}, clientId={}, rating={}", serviceRequestId, clientId,
+                rating);
 
         ServiceRequest serviceRequest = serviceRequestRepository.findById(serviceRequestId)
                 .orElseThrow(() -> new IllegalArgumentException("Solicitação de serviço não encontrada"));
@@ -74,8 +74,7 @@ public class ReviewService {
                 serviceRequest.getClient(),
                 serviceRequest.getProvider(),
                 rating,
-                comment
-        );
+                comment);
 
         Review savedReview = reviewRepository.save(review);
         log.info("Review salva com sucesso: id={}", savedReview.getId());
@@ -87,7 +86,8 @@ public class ReviewService {
     }
 
     /**
-     * Atualiza a nota média do prestador de forma assíncrona usando Virtual Threads.
+     * Atualiza a nota média do prestador de forma assíncrona usando Virtual
+     * Threads.
      */
     @Async("virtualThreadExecutor")
     @Transactional
@@ -96,17 +96,19 @@ public class ReviewService {
 
         List<Integer> ratings = reviewRepository.findAllRatingsByProviderId(providerId);
 
-        if (ratings.isEmpty()) return;
+        if (ratings.isEmpty())
+            return;
 
         double sum = ratings.stream().mapToInt(Integer::intValue).sum();
         BigDecimal average = BigDecimal.valueOf(sum / ratings.size())
                 .setScale(2, RoundingMode.HALF_UP);
 
         ProviderProfile profile = providerProfileRepository.findByUserId(providerId)
-                .orElseThrow(() -> new RuntimeException("Perfil do prestador não encontrado para o usuário: " + providerId));
+                .orElseThrow(
+                        () -> new RuntimeException("Perfil do prestador não encontrado para o usuário: " + providerId));
 
         log.info("[Async] Nova média calculada: {} (total de {} avaliações)", average, ratings.size());
-        
+
         profile.setRatingAverage(average);
         providerProfileRepository.save(profile);
     }
