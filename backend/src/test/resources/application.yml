@@ -1,0 +1,24 @@
+# Configurações de teste
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/marketplace_ceara_test
+    username: marketplace
+    password: marketplace_dev
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+
+# Storage mock
+storage:
+  s3:
+    endpoint: http://localhost:9000
+    access-key: minioadmin
+    secret-key: minioadmin123
+    bucket: marketplace-files
+    region: us-east-1
+
+# JWT com secret curto e expiração longa para facilitar os testes
+jwt:
+  secret: test-secret-key-for-unit-and-integration-tests-only-not-production
+  expiration-ms: 3600000

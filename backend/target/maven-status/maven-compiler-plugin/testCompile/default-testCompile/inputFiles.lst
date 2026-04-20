@@ -1,0 +1,9 @@
+/home/marcos/Applications/marketplace_ceara/backend/src/test/java/com/marketplace/ceara/HealthCheckTest.java
+/home/marcos/Applications/marketplace_ceara/backend/src/test/java/com/marketplace/ceara/MarketplaceCearaApplicationTests.java
+/home/marcos/Applications/marketplace_ceara/backend/src/test/java/com/marketplace/ceara/identity/AuthServiceUnitTest.java
+/home/marcos/Applications/marketplace_ceara/backend/src/test/java/com/marketplace/ceara/identity/GeolocationIntegrationTest.java
+/home/marcos/Applications/marketplace_ceara/backend/src/test/java/com/marketplace/ceara/identity/IdentityIntegrationTest.java
+/home/marcos/Applications/marketplace_ceara/backend/src/test/java/com/marketplace/ceara/identity/PaymentIntegrationTest.java
+/home/marcos/Applications/marketplace_ceara/backend/src/test/java/com/marketplace/ceara/identity/ReviewIntegrationTest.java
+/home/marcos/Applications/marketplace_ceara/backend/src/test/java/com/marketplace/ceara/identity/ServiceRequestIntegrationTest.java
+/home/marcos/Applications/marketplace_ceara/backend/src/test/java/com/marketplace/ceara/service/ReviewServiceTest.java

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.marketplace.ceara.identity.ServiceRequestIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.813 s -- in com.marketplace.ceara.identity.ServiceRequestIntegrationTest

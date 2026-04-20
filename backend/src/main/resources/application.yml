@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: marketplace-ceara
+
+  # === Virtual Threads (Java 21) ===
+  threads:
+    virtual:
+      enabled: true
+
+  # === Banco de Dados ===
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:marketplace_ceara}
+    username: ${DB_USER:marketplace}
+    password: ${DB_PASSWORD:marketplace_dev}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+# === Storage S3 / MinIO ===
+# Para trocar de MinIO para AWS S3, basta alterar estas variáveis de ambiente:
+#   STORAGE_S3_ENDPOINT, STORAGE_S3_ACCESS_KEY, STORAGE_S3_SECRET_KEY, STORAGE_S3_REGION
+storage:
+  s3:
+    endpoint: ${STORAGE_S3_ENDPOINT:http://localhost:9000}
+    access-key: ${STORAGE_S3_ACCESS_KEY:minioadmin}
+    secret-key: ${STORAGE_S3_SECRET_KEY:minioadmin123}
+    bucket: ${STORAGE_S3_BUCKET:marketplace-files}
+    region: ${STORAGE_S3_REGION:us-east-1}
+
+# === Servidor ===
+server:
+  port: ${SERVER_PORT:8080}
+
+# === JWT ===
+jwt:
+  secret: ${JWT_SECRET:3cfa76ef14937c1c0ea519f8fc057a80fcd04a7e4ac4e2ff8b96c6f5e9c1c9a5}
+  expiration-ms: ${JWT_EXPIRATION_MS:86400000}
