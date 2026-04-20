@@ -1,10 +1,10 @@
-com/marketplace/ceara/identity/AuthServiceUnitTest.class
 com/marketplace/ceara/identity/ReviewIntegrationTest.class
-com/marketplace/ceara/identity/IdentityIntegrationTest.class
-com/marketplace/ceara/HealthCheckTest.class
-com/marketplace/ceara/identity/ServiceRequestIntegrationTest.class
 com/marketplace/ceara/service/ReviewServiceTest.class
 com/marketplace/ceara/identity/PaymentIntegrationTest.class
 com/marketplace/ceara/HealthCheckTest$Produto.class
 com/marketplace/ceara/MarketplaceCearaApplicationTests.class
+com/marketplace/ceara/identity/AuthServiceUnitTest.class
+com/marketplace/ceara/identity/IdentityIntegrationTest.class
+com/marketplace/ceara/HealthCheckTest.class
+com/marketplace/ceara/identity/ServiceRequestIntegrationTest.class
 com/marketplace/ceara/identity/GeolocationIntegrationTest.class

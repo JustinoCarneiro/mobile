@@ -1,12 +1,13 @@
 package com.marketplace.ceara.identity;
 
-import com.marketplace.ceara.controller.PaymentController;
 import com.marketplace.ceara.model.ServiceRequest;
 import com.marketplace.ceara.model.Transaction;
 import com.marketplace.ceara.model.User;
 import com.marketplace.ceara.model.enums.Role;
 import com.marketplace.ceara.model.enums.ServiceRequestStatus;
 import com.marketplace.ceara.model.enums.TransactionStatus;
+import com.marketplace.ceara.repository.ProviderProfileRepository;
+import com.marketplace.ceara.repository.ReviewRepository;
 import com.marketplace.ceara.repository.ServiceRequestRepository;
 import com.marketplace.ceara.repository.TransactionRepository;
 import com.marketplace.ceara.repository.UserRepository;
@@ -17,7 +18,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,8 +33,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
 @DisplayName("Payment & Escrow — Testes de Integração e Atomicidade (US05, US06)")
+@SuppressWarnings("null")
 class PaymentIntegrationTest {
 
     @Autowired MockMvc mockMvc;
@@ -41,7 +45,9 @@ class PaymentIntegrationTest {
     @Autowired TransactionRepository transactionRepository;
     @Autowired PasswordEncoder passwordEncoder;
     
-    @SpyBean ServiceRequestRepository spyServiceRequestRepository;
+    @Autowired ReviewRepository reviewRepository;
+    @Autowired ProviderProfileRepository providerProfileRepository;
+    @MockitoSpyBean ServiceRequestRepository spyServiceRequestRepository;
     @Autowired PaymentService paymentService;
 
     private ServiceRequest serviceRequest;
@@ -50,8 +56,10 @@ class PaymentIntegrationTest {
 
     @BeforeEach
     void setup() {
+        reviewRepository.deleteAll();
         transactionRepository.deleteAll();
         serviceRequestRepository.deleteAll();
+        providerProfileRepository.deleteAll();
         userRepository.deleteAll();
 
         client = new User("Cliente Pagador", "cliente@pay.com", passwordEncoder.encode("123"), "11111111111", Role.CLIENT);

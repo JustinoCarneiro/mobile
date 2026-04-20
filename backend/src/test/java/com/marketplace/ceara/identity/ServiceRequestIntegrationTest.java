@@ -3,7 +3,10 @@ package com.marketplace.ceara.identity;
 import com.marketplace.ceara.model.User;
 import com.marketplace.ceara.model.enums.Role;
 import com.marketplace.ceara.model.enums.ServiceRequestStatus;
+import com.marketplace.ceara.repository.ProviderProfileRepository;
+import com.marketplace.ceara.repository.ReviewRepository;
 import com.marketplace.ceara.repository.ServiceRequestRepository;
+import com.marketplace.ceara.repository.TransactionRepository;
 import com.marketplace.ceara.repository.UserRepository;
 import com.marketplace.ceara.security.JwtTokenService;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,27 +18,40 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.HeadObjectRequest;
 
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
 @DisplayName("Service Request — Testes de Integração Multimídia (US04)")
 class ServiceRequestIntegrationTest {
 
-    @Autowired MockMvc mockMvc;
-    @Autowired UserRepository userRepository;
-    @Autowired ServiceRequestRepository serviceRequestRepository;
-    @Autowired PasswordEncoder passwordEncoder;
-    @Autowired JwtTokenService jwtTokenService;
-    @Autowired S3Client s3Client;
+    @Autowired
+    MockMvc mockMvc;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    ServiceRequestRepository serviceRequestRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
+    JwtTokenService jwtTokenService;
+    @Autowired
+    ReviewRepository reviewRepository;
+    @Autowired
+    TransactionRepository transactionRepository;
+    @Autowired
+    ProviderProfileRepository providerProfileRepository;
+    @org.springframework.test.context.bean.override.mockito.MockitoBean
+    S3Client s3Client;
 
     private User client;
     private User provider;
@@ -43,36 +59,41 @@ class ServiceRequestIntegrationTest {
 
     @BeforeEach
     void setup() {
+        reviewRepository.deleteAll();
+        transactionRepository.deleteAll();
         serviceRequestRepository.deleteAll();
+        providerProfileRepository.deleteAll();
         userRepository.deleteAll();
 
         // Criar Cliente
-        client = new User("Cliente das Neves", "cliente@us04.com", passwordEncoder.encode("senha123"), "11122233344", Role.CLIENT);
+        client = new User("Cliente das Neves", "cliente@us04.com", passwordEncoder.encode("senha123"), "11122233344",
+                Role.CLIENT);
         userRepository.save(client);
         clientToken = "Bearer " + jwtTokenService.generateToken(client);
 
         // Criar Prestador
-        provider = new User("Prestador de Java", "prestador@us04.com", passwordEncoder.encode("senha123"), "55566677788", Role.PROVIDER);
+        provider = new User("Prestador de Java", "prestador@us04.com", passwordEncoder.encode("senha123"),
+                "55566677788", Role.PROVIDER);
         userRepository.save(provider);
     }
 
     @Test
-    @DisplayName("Deve criar um chamado com imagem e validar persistência e storage")
+    @DisplayName("Deve criar um chamado com sucesso incluindo upload de arquivo")
+    @SuppressWarnings("null")
     void shouldCreateServiceRequestWithFile() throws Exception {
         // 1. Preparar o arquivo mockado
         MockMultipartFile file = new MockMultipartFile(
                 "file",
                 "problema_cano.jpg",
                 MediaType.IMAGE_JPEG_VALUE,
-                "conteúdo da imagem de teste".getBytes()
-        );
+                "conteúdo da imagem de teste".getBytes());
 
         // 2. Executar POST multipart
-        var result = mockMvc.perform(multipart("/api/v1/services/requests")
-                        .file(file)
-                        .param("description", "Vazamento no banheiro social")
-                        .param("providerId", provider.getId().toString())
-                        .header("Authorization", clientToken))
+        mockMvc.perform(multipart("/api/v1/services/requests")
+                .file(file)
+                .param("description", "Vazamento no banheiro social")
+                .param("providerId", provider.getId().toString())
+                .header("Authorization", clientToken))
                 .andExpect(status().isCreated())
                 .andReturn();
 
@@ -99,11 +120,12 @@ class ServiceRequestIntegrationTest {
 
     @Test
     @DisplayName("Deve criar um chamado apenas com texto (sem arquivo)")
+    @SuppressWarnings("null")
     void shouldCreateServiceRequestWithoutFile() throws Exception {
         mockMvc.perform(multipart("/api/v1/services/requests")
-                        .param("description", "Apenas descrição em texto")
-                        .param("providerId", provider.getId().toString())
-                        .header("Authorization", clientToken))
+                .param("description", "Apenas descrição em texto")
+                .param("providerId", provider.getId().toString())
+                .header("Authorization", clientToken))
                 .andExpect(status().isCreated());
 
         var requests = serviceRequestRepository.findAll();
@@ -113,13 +135,14 @@ class ServiceRequestIntegrationTest {
 
     @Test
     @DisplayName("Deve bloquear prestador de abrir chamados (apenas ROLE_CLIENT)")
+    @SuppressWarnings("null")
     void shouldBlockProviderFromCreatingRequest() throws Exception {
         String providerToken = "Bearer " + jwtTokenService.generateToken(provider);
 
         mockMvc.perform(multipart("/api/v1/services/requests")
-                        .param("description", "Tentativa proibida")
-                        .param("providerId", provider.getId().toString())
-                        .header("Authorization", providerToken))
+                .param("description", "Tentativa proibida")
+                .param("providerId", provider.getId().toString())
+                .header("Authorization", providerToken))
                 .andExpect(status().isForbidden());
     }
 

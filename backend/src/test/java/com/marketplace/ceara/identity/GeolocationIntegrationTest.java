@@ -1,6 +1,5 @@
 package com.marketplace.ceara.identity;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marketplace.ceara.model.ProviderProfile;
 import com.marketplace.ceara.model.User;
 import com.marketplace.ceara.model.enums.Role;
@@ -14,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -24,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
 @DisplayName("Motor de Busca — Testes de Integração Geográfica (US03)")
 class GeolocationIntegrationTest {
@@ -70,6 +70,7 @@ class GeolocationIntegrationTest {
 
     @Test
     @DisplayName("Deve retornar prestadores num raio de 10km ordenados por distância")
+    @SuppressWarnings("null")
     void shouldReturnProvidersWithin10km() throws Exception {
         // Buscando do Centro de Fortaleza
         mockMvc.perform(get("/api/v1/providers/nearby")
@@ -87,6 +88,7 @@ class GeolocationIntegrationTest {
 
     @Test
     @DisplayName("Deve retornar todos os 3 prestadores se o raio for aumentado para 20km")
+    @SuppressWarnings("null")
     void shouldReturnAllProvidersWithin20km() throws Exception {
         mockMvc.perform(get("/api/v1/providers/nearby")
                         .header("Authorization", authToken)
@@ -100,6 +102,7 @@ class GeolocationIntegrationTest {
 
     @Test
     @DisplayName("Não deve retornar nada para categoria inexistente")
+    @SuppressWarnings("null")
     void shouldReturnEmptyForWrongCategory() throws Exception {
         mockMvc.perform(get("/api/v1/providers/nearby")
                         .header("Authorization", authToken)

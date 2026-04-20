@@ -23,6 +23,7 @@ import java.util.UUID;
  * Gerencia a criação de reviews e o recálculo da média do prestador.
  */
 @Service
+@SuppressWarnings("null")
 public class ReviewService {
 
     private static final Logger log = LoggerFactory.getLogger(ReviewService.class);

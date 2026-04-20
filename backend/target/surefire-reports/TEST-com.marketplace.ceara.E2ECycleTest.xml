@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.marketplace.ceara.identity.ServiceRequestIntegrationTest" time="0.686" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.marketplace.ceara.E2ECycleTest" time="13.524" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -47,14 +47,14 @@
     <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
     <property name="java.io.tmpdir" value="/tmp"/>
     <property name="catalina.home" value="/tmp/tomcat.0.9836919376778140671"/>
-    <property name="com.zaxxer.hikari.pool_number" value="3"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
     <property name="java.version" value="21.0.2"/>
     <property name="user.dir" value="/home/marcos/Applications/marketplace_ceara/backend"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="PID" value="168110"/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
-    <property name="catalina.base" value="/tmp/tomcat.0.12353622946122071199"/>
+    <property name="catalina.base" value="/tmp/tomcat.0.9836919376778140671"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -64,21 +64,86 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="shouldBlockProviderFromCreatingRequest" classname="com.marketplace.ceara.identity.ServiceRequestIntegrationTest" time="0.176">
-    <system-out><![CDATA[2026-04-20T14:26:22.366-03:00  INFO 168110 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.marketplace.ceara.identity.ServiceRequestIntegrationTest]: ServiceRequestIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-04-20T14:26:22.369-03:00  INFO 168110 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.marketplace.ceara.MarketplaceCearaApplication for test class com.marketplace.ceara.identity.ServiceRequestIntegrationTest
+  <testcase name="fullServiceLifecycle" classname="com.marketplace.ceara.E2ECycleTest" time="6.448">
+    <system-out><![CDATA[Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+14:26:02.212 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.marketplace.ceara.E2ECycleTest]: E2ECycleTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:26:02.316 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.marketplace.ceara.MarketplaceCearaApplication for test class com.marketplace.ceara.E2ECycleTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.5)
+
+2026-04-20T14:26:02.656-03:00  INFO 168110 --- [           main] com.marketplace.ceara.E2ECycleTest       : Starting E2ECycleTest using Java 21.0.2 with PID 168110 (started by marcos in /home/marcos/Applications/marketplace_ceara/backend)
+2026-04-20T14:26:02.657-03:00  INFO 168110 --- [           main] com.marketplace.ceara.E2ECycleTest       : The following 1 profile is active: "test"
+2026-04-20T14:26:03.653-03:00  INFO 168110 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-20T14:26:03.707-03:00  INFO 168110 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 45 ms. Found 5 JPA repository interfaces.
+2026-04-20T14:26:05.358-03:00  INFO 168110 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2026-04-20T14:26:05.377-03:00  INFO 168110 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-20T14:26:05.377-03:00  INFO 168110 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+2026-04-20T14:26:05.489-03:00  INFO 168110 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-20T14:26:05.500-03:00  INFO 168110 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2824 ms
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+2026-04-20T14:26:05.815-03:00  INFO 168110 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-20T14:26:05.876-03:00  INFO 168110 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2026-04-20T14:26:05.919-03:00  INFO 168110 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-20T14:26:06.076-03:00  INFO 168110 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-20T14:26:06.122-03:00  INFO 168110 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-20T14:26:06.346-03:00  INFO 168110 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-04-20T14:26:06.347-03:00  INFO 168110 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-20T14:26:06.366-03:00  WARN 168110 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-20T14:26:06.386-03:00  INFO 168110 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-20T14:26:07.077-03:00  INFO 168110 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-20T14:26:07.131-03:00  INFO 168110 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-20T14:26:07.414-03:00  INFO 168110 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-20T14:26:07.460-03:00  INFO 168110 --- [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-04-20T14:26:07.461-03:00  WARN 168110 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-04-20T14:26:08.271-03:00  WARN 168110 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-20T14:26:08.986-03:00  INFO 168110 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring TestDispatcherServlet ''
+2026-04-20T14:26:08.986-03:00  INFO 168110 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-04-20T14:26:08.988-03:00  INFO 168110 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-04-20T14:26:09.144-03:00  INFO 168110 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 35927 (http) with context path '/'
+2026-04-20T14:26:09.154-03:00  INFO 168110 --- [           main] com.marketplace.ceara.E2ECycleTest       : Started E2ECycleTest in 6.743 seconds (process running for 7.572)
+2026-04-20T14:26:09.264-03:00  INFO 168110 --- [           main] com.marketplace.ceara.E2ECycleTest       : >>> [QA AUDIT] INICIANDO TESTE E2E
+2026-04-20T14:26:09.502-03:00  INFO 168110 --- [           main] c.marketplace.ceara.service.AuthService  : Cliente registrado: email=joao.qa@e2e.com
+2026-04-20T14:26:09.665-03:00  INFO 168110 --- [           main] c.marketplace.ceara.service.AuthService  : Prestador registrado: email=maria.qa@e2e.com, userId=04cdc23c-c05f-4826-b52d-992340263449
+2026-04-20T14:26:09.673-03:00  INFO 168110 --- [kground-check-0] c.m.c.service.BackgroundCheckService     : [BackgroundCheck] Iniciando verificação para userId=04cdc23c-c05f-4826-b52d-992340263449 em thread=VirtualThread[#60,vthread-background-check-0]/runnable@ForkJoinPool-1-worker-1
+2026-04-20T14:26:14.695-03:00  INFO 168110 --- [kground-check-0] c.m.c.service.BackgroundCheckService     : [BackgroundCheck] APPROVED para userId=04cdc23c-c05f-4826-b52d-992340263449
+2026-04-20T14:26:15.243-03:00  INFO 168110 --- [           main] c.m.ceara.service.ServiceRequestService  : Iniciando criação de chamado: clienteId=a21cfe51-2968-46e9-95f2-5104d6f4e35c, prestadorId=04cdc23c-c05f-4826-b52d-992340263449
+2026-04-20T14:26:15.257-03:00  INFO 168110 --- [           main] c.m.ceara.service.ServiceRequestService  : Chamado criado com sucesso: id=2010ccb4-0c0b-4878-a16d-1d75e6fe48d4
+2026-04-20T14:26:15.301-03:00  INFO 168110 --- [           main] c.m.ceara.service.ServiceRequestService  : Atualizando status da solicitação: id=2010ccb4-0c0b-4878-a16d-1d75e6fe48d4, novoStatus=ACCEPTED
+2026-04-20T14:26:15.301-03:00  INFO 168110 --- [           main] c.m.ceara.service.ServiceRequestService  : Buscando solicitação por ID: 2010ccb4-0c0b-4878-a16d-1d75e6fe48d4
+2026-04-20T14:26:15.313-03:00  INFO 168110 --- [           main] c.m.ceara.service.PaymentService         : Iniciando checkout: serviceRequestId=2010ccb4-0c0b-4878-a16d-1d75e6fe48d4, amount=350.00
+2026-04-20T14:26:15.317-03:00  INFO 168110 --- [           main] c.m.ceara.gateway.MockPaymentGateway     : [PaymentGateway] Gerando checkout fictício: txId=87129d0a-8f18-4325-a574-34e5ff72870c, amount=350.00
+2026-04-20T14:26:15.318-03:00  INFO 168110 --- [           main] c.m.ceara.service.PaymentService         : Checkout criado via Gateway: gatewayId=GTW_5ae71201
+2026-04-20T14:26:15.332-03:00  INFO 168110 --- [           main] c.m.ceara.service.PaymentService         : [Webhook] Confirmando pagamento para gatewayId=GTW_5ae71201
+2026-04-20T14:26:15.339-03:00  INFO 168110 --- [           main] c.m.ceara.service.PaymentService         : PAGAMENTO GARANTIDO (Escrow): txId=87129d0a-8f18-4325-a574-34e5ff72870c, serviceId=2010ccb4-0c0b-4878-a16d-1d75e6fe48d4
+2026-04-20T14:26:15.345-03:00  INFO 168110 --- [           main] c.m.ceara.service.ServiceRequestService  : Atualizando status da solicitação: id=2010ccb4-0c0b-4878-a16d-1d75e6fe48d4, novoStatus=COMPLETED
+2026-04-20T14:26:15.345-03:00  INFO 168110 --- [           main] c.m.ceara.service.ServiceRequestService  : Buscando solicitação por ID: 2010ccb4-0c0b-4878-a16d-1d75e6fe48d4
+2026-04-20T14:26:15.350-03:00  INFO 168110 --- [           main] c.m.ceara.service.PaymentService         : Iniciando liberação de fundos para solicitação: 2010ccb4-0c0b-4878-a16d-1d75e6fe48d4
+2026-04-20T14:26:15.359-03:00  INFO 168110 --- [           main] c.m.ceara.service.PaymentService         : PAGAMENTO LIBERADO para o prestador. txId=87129d0a-8f18-4325-a574-34e5ff72870c
+2026-04-20T14:26:15.390-03:00  INFO 168110 --- [           main] c.m.ceara.service.ReviewService          : Iniciando criação de review: serviceRequestId=2010ccb4-0c0b-4878-a16d-1d75e6fe48d4, clientId=a21cfe51-2968-46e9-95f2-5104d6f4e35c, rating=5
+2026-04-20T14:26:15.403-03:00  INFO 168110 --- [           main] c.m.ceara.service.ReviewService          : Review salva com sucesso: id=03146ecd-12ec-41f0-be96-47a1a5eb2921
+2026-04-20T14:26:15.404-03:00  INFO 168110 --- [           main] c.m.ceara.service.ReviewService          : [Async] Recalculando média para prestadorId=04cdc23c-c05f-4826-b52d-992340263449
+2026-04-20T14:26:15.432-03:00  INFO 168110 --- [           main] c.m.ceara.service.ReviewService          : [Async] Nova média calculada: 5.00 (total de 1 avaliações)
+2026-04-20T14:26:15.567-03:00  INFO 168110 --- [           main] com.marketplace.ceara.E2ECycleTest       : >>> TESTE E2E OK - Tempo: 6303ms
 ]]></system-out>
-  </testcase>
-  <testcase name="shouldCreateServiceRequestWithFile" classname="com.marketplace.ceara.identity.ServiceRequestIntegrationTest" time="0.251">
-    <system-out><![CDATA[2026-04-20T14:26:22.725-03:00  INFO 168110 --- [           main] c.m.ceara.service.ServiceRequestService  : Iniciando criação de chamado: clienteId=a5d8d007-5934-4423-8dcf-997aa436d2a8, prestadorId=cfaa4ab1-d0a3-4c14-9577-222f1a5f9812
-2026-04-20T14:26:22.728-03:00  INFO 168110 --- [           main] c.m.ceara.service.FileStorageService     : Iniciando upload para S3: fileName=58c223fb-c25c-49c9-8dee-0be3d366b576_problema_cano.jpg, size=28
-2026-04-20T14:26:22.776-03:00  INFO 168110 --- [           main] c.m.ceara.service.FileStorageService     : Upload concluído: url=http://localhost:9000/marketplace-files/58c223fb-c25c-49c9-8dee-0be3d366b576_problema_cano.jpg
-2026-04-20T14:26:22.777-03:00  INFO 168110 --- [           main] c.m.ceara.service.ServiceRequestService  : Chamado criado com sucesso: id=d4c1a8d6-62ec-42d7-bd94-dcd3ee803760
-]]></system-out>
-  </testcase>
-  <testcase name="shouldCreateServiceRequestWithoutFile" classname="com.marketplace.ceara.identity.ServiceRequestIntegrationTest" time="0.244">
-    <system-out><![CDATA[2026-04-20T14:26:23.031-03:00  INFO 168110 --- [           main] c.m.ceara.service.ServiceRequestService  : Iniciando criação de chamado: clienteId=ef5854de-0f73-4ab3-85d6-e4600f0a86f4, prestadorId=89de2bea-e8a1-4e5c-8258-01e713c3175b
-2026-04-20T14:26:23.035-03:00  INFO 168110 --- [           main] c.m.ceara.service.ServiceRequestService  : Chamado criado com sucesso: id=7584dc1a-74b6-488e-a091-d969ad699526
-]]></system-out>
+    <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (/home/marcos/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
   </testcase>
 </testsuite>

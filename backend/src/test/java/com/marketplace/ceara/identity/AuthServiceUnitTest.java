@@ -31,6 +31,7 @@ import static org.mockito.Mockito.*;
  */
 @ExtendWith(MockitoExtension.class)
 @DisplayName("AuthService — Testes de Unidade")
+@SuppressWarnings("null")
 class AuthServiceUnitTest {
 
     @Mock UserRepository userRepository;

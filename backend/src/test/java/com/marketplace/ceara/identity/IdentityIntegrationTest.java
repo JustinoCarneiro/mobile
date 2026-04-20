@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.concurrent.TimeUnit;
@@ -33,14 +34,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *   4. Login inválido → 401 Unauthorized
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
 @DisplayName("Identity Module — Testes de Integração")
+@SuppressWarnings("null")
 class IdentityIntegrationTest {
 
     @Autowired MockMvc mockMvc;
     @Autowired ObjectMapper objectMapper;
     @Autowired UserRepository userRepository;
     @Autowired ProviderProfileRepository providerProfileRepository;
+    @Autowired com.marketplace.ceara.repository.ServiceRequestRepository serviceRequestRepository;
+    @Autowired com.marketplace.ceara.repository.ReviewRepository reviewRepository;
+    @Autowired com.marketplace.ceara.repository.TransactionRepository transactionRepository;
+
+    @org.junit.jupiter.api.BeforeEach
+    void setup() {
+        reviewRepository.deleteAll();
+        transactionRepository.deleteAll();
+        serviceRequestRepository.deleteAll();
+        providerProfileRepository.deleteAll();
+        userRepository.deleteAll();
+    }
 
     private static final String BASE_URL = "/api/v1/auth";
 

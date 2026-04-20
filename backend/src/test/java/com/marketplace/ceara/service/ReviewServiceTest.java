@@ -22,6 +22,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("ReviewService — Testes de Unidade (US08)")
+@SuppressWarnings("null")
 class ReviewServiceTest {
 
     @Mock ReviewRepository reviewRepository;

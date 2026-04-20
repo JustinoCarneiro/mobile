@@ -17,6 +17,7 @@ import java.util.UUID;
  * Serviço de gestão de solicitações de serviço (US04).
  */
 @Service
+@SuppressWarnings("null")
 public class ServiceRequestService {
 
     private static final Logger log = LoggerFactory.getLogger(ServiceRequestService.class);

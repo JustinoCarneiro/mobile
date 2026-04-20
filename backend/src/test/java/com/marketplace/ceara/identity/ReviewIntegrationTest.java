@@ -8,6 +8,7 @@ import com.marketplace.ceara.model.enums.ServiceRequestStatus;
 import com.marketplace.ceara.repository.ProviderProfileRepository;
 import com.marketplace.ceara.repository.ReviewRepository;
 import com.marketplace.ceara.repository.ServiceRequestRepository;
+import com.marketplace.ceara.repository.TransactionRepository;
 import com.marketplace.ceara.repository.UserRepository;
 import com.marketplace.ceara.security.JwtTokenService;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,10 +19,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,8 +31,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
 @DisplayName("Review — Testes de Integração e Reputação (US08)")
+@SuppressWarnings("null")
 class ReviewIntegrationTest {
 
     @Autowired MockMvc mockMvc;
@@ -42,6 +45,8 @@ class ReviewIntegrationTest {
     @Autowired PasswordEncoder passwordEncoder;
     @Autowired JwtTokenService jwtTokenService;
 
+    @Autowired TransactionRepository transactionRepository;
+
     private User client;
     private User providerUser;
     private String clientToken;
@@ -49,6 +54,7 @@ class ReviewIntegrationTest {
     @BeforeEach
     void setup() {
         reviewRepository.deleteAll();
+        transactionRepository.deleteAll();
         serviceRequestRepository.deleteAll();
         providerProfileRepository.deleteAll();
         userRepository.deleteAll();

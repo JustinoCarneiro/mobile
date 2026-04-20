@@ -19,6 +19,7 @@ import java.util.UUID;
  * Serviço responsável por pagamentos e gestão de Escrow (US05, US06).
  */
 @Service
+@SuppressWarnings("null")
 public class PaymentService {
 
     private static final Logger log = LoggerFactory.getLogger(PaymentService.class);
