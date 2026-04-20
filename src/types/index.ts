@@ -5,6 +5,15 @@
 
 export type UserRole = 'ROLE_CLIENT' | 'ROLE_PROVIDER';
 
+export enum ServiceRequestStatus {
+  PENDING = 'PENDING',
+  ACCEPTED = 'ACCEPTED',
+  REJECTED = 'REJECTED',
+  CANCELED = 'CANCELED',
+  COMPLETED = 'COMPLETED',
+  PAYMENT_CONFIRMED = 'PAYMENT_CONFIRMED'
+}
+
 export interface AuthResponse {
   token: string;
   type: string;
@@ -24,4 +33,19 @@ export interface NearbyProviderDTO {
   category: string;
   ratingAverage: number;
   distanceKm: number;
+}
+
+export interface ServiceRequestDTO {
+  id: string;
+  provider: {
+    fullName: string;
+    category: string;
+  };
+  client: {
+    fullName: string;
+  };
+  description: string;
+  mediaUrl?: string;
+  status: ServiceRequestStatus;
+  createdAt: string;
 }

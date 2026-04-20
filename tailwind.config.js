@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'ceara-blue': '#0056b3', // Cor institucional fictícia baseada no requisito
+        'ceara-blue': '#004595', // Cor institucional oficial — spec 13_componentes_base.md
       }
     },
   },

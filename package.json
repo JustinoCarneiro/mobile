@@ -17,6 +17,7 @@
     "autoprefixer": "^10.4.20",
     "axios": "^1.15.0",
     "expo": "~54.0.33",
+    "expo-image-picker": "^55.0.18",
     "expo-location": "~19.0.8",
     "expo-status-bar": "~3.0.9",
     "nativewind": "^4.2.3",
