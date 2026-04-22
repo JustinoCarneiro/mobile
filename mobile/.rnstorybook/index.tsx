@@ -1,7 +1,6 @@
-import { getStorybookUI } from "@storybook/react-native";
-import "./storybook.requires";
+import { view } from "./storybook.requires";
 
-const StorybookUIRoot = getStorybookUI({
+const StorybookUIRoot = view.getStorybookUI({
   shouldPersistSelection: true,
 });
 
