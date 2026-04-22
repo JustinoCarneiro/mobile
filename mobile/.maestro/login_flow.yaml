@@ -1,0 +1,10 @@
+appId: com.marketplace.ceara
+---
+- launchApp
+- tapOn: "E-mail"
+- inputText: "joao.qa@e2e.com"
+- tapOn: "Senha"
+- inputText: "123456"
+- tapOn: "Entrar"
+- assertVisible: "Explorar"
+- assertVisible: "Encontre os melhores profissionais"

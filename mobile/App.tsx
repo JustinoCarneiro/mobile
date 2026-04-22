@@ -13,7 +13,11 @@ import AppNavigator from './src/navigation';
  * Isso evita a race condition do Android onde react-native-screens
  * tenta acessar o contexto antes dele estar pronto.
  */
-export default function App() {
+import StorybookUIRoot from './.rnstorybook';
+
+const SHOW_STORYBOOK = process.env.EXPO_PUBLIC_STORYBOOK === 'true';
+
+function App() {
   const { token } = useAuthStore();
   const [isNavigationReady, setIsNavigationReady] = useState(false);
 
@@ -30,3 +34,5 @@ export default function App() {
     </SafeAreaProvider>
   );
 }
+
+export default SHOW_STORYBOOK ? StorybookUIRoot : App;
