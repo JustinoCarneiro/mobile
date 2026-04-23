@@ -1,4 +1,4 @@
-appId: com.marketplace.ceara
+appId: host.exp.exponent
 ---
 - launchApp
 - tapOn: "E-mail"
