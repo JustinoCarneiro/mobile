@@ -36,7 +36,7 @@ export const ProviderCard = ({ provider, onPress }: ProviderCardProps) => {
           <View className="bg-yellow-100 px-2 py-0.5 rounded-md flex-row items-center">
             <Text className="text-yellow-700 text-xs font-bold mr-1">★</Text>
             <Text className="text-yellow-700 text-xs font-bold">
-              {provider.ratingAverage.toFixed(1)}
+              {(provider.ratingAverage ?? 0).toFixed(1)}
             </Text>
           </View>
         </View>
@@ -44,7 +44,7 @@ export const ProviderCard = ({ provider, onPress }: ProviderCardProps) => {
         <Text className="text-gray-500 mb-1">{provider.category}</Text>
 
         <View className="flex-row items-center">
-          <Text className="text-xs text-gray-400 mr-2">📍 {provider.distanceKm.toFixed(1)} km de distância</Text>
+          <Text className="text-xs text-gray-400 mr-2">📍 {(provider.distanceKm ?? 0).toFixed(1)} km de distância</Text>
         </View>
       </View>
 

@@ -99,6 +99,7 @@ export default function ServiceRequestScreen({ route, navigation }: Props) {
             numberOfLines={5}
             textAlignVertical="top"
             className="mb-6 h-32"
+            testID="service-description-input"
           />
 
           <Text className="text-gray-700 font-semibold mb-2 ml-1">Anexar uma foto (Opcional)</Text>

@@ -1,7 +1,7 @@
 # Configurações de teste
 spring:
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/marketplace_ceara_test
+    url: jdbc:postgresql://127.0.0.1:5433/marketplace_ceara_test
     username: marketplace
     password: marketplace_dev
   jpa:

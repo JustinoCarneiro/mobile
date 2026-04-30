@@ -15,7 +15,8 @@ public interface ProviderProfileRepository extends JpaRepository<ProviderProfile
     Optional<ProviderProfile> findByUserId(UUID userId);
 
     @Query(value = """
-        SELECT u.full_name AS fullName, 
+        SELECT u.id AS id,
+               u.full_name AS fullName, 
                p.category AS category, 
                p.rating_average AS ratingAverage,
                (6371 * acos(
@@ -40,6 +41,7 @@ public interface ProviderProfileRepository extends JpaRepository<ProviderProfile
      * Projeção para capturar resultados da busca geolocalizada.
      */
     interface NearbyProviderProjection {
+        java.util.UUID getId();
         String getFullName();
         String getCategory();
         java.math.BigDecimal getRatingAverage();

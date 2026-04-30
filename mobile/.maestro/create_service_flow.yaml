@@ -1,0 +1,41 @@
+appId: host.exp.exponent
+---
+# Assume que o usuário já está logado na Home (Explorar)
+- assertVisible: "O que você precisa hoje?"
+
+# Seleciona a categoria Eletricista
+- tapOn: "Eletricista"
+
+# Espera o prestador carregar (a API pode demorar)
+- extendedWaitUntil:
+    visible: "Prestador E2E"
+    timeout: 15000
+
+# Clica no card do prestador
+- tapOn: "Prestador E2E"
+
+# Tela de Solicitação de Serviço
+- extendedWaitUntil:
+    visible: "Descreva o seu problema"
+    timeout: 5000
+
+- tapOn:
+    id: "service-description-input"
+- eraseText
+- inputText: "Preciso de um orcamento para a fiacao da minha casa nova."
+
+- hideKeyboard
+
+# Clica em enviar solicitação
+- tapOn: "Enviar Solicitação"
+
+# Confirma o popup de sucesso
+- extendedWaitUntil:
+    visible: "Sucesso"
+    timeout: 10000
+- tapOn: "OK"
+
+# Deve navegar para a tela de Pedidos
+- extendedWaitUntil:
+    visible: "Pedidos"
+    timeout: 5000

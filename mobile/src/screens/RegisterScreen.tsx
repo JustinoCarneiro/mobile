@@ -55,7 +55,8 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
         bio: role === 'ROLE_PROVIDER' ? bio : undefined,
       };
 
-      await api.post('/auth/register', payload);
+      const endpoint = role === 'ROLE_PROVIDER' ? '/auth/register/provider' : '/auth/register/client';
+      await api.post(endpoint, payload);
       
       Alert.alert('Sucesso', 'Cadastro realizado! Agora você pode fazer login.', [
         { text: 'OK', onPress: () => navigation.goBack() }
@@ -105,6 +106,7 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
             value={fullName}
             onChangeText={(v) => { setFullName(v); setErrors((e) => ({ ...e, fullName: '' })); }}
             error={errors.fullName}
+            testID="register-name-input"
           />
 
           <Input
@@ -116,6 +118,7 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
             keyboardType="email-address"
             autoCapitalize="none"
             error={errors.email}
+            testID="register-email-input"
           />
 
           <Input
@@ -127,6 +130,7 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
             keyboardType="numeric"
             maxLength={11}
             error={errors.cpf}
+            testID="register-cpf-input"
           />
 
           <Input
@@ -137,6 +141,7 @@ export default function RegisterScreen({ navigation }: { navigation: NavigationP
             onChangeText={(v) => { setPassword(v); setErrors((e) => ({ ...e, password: '' })); }}
             isPassword
             error={errors.password}
+            testID="register-password-input"
           />
 
           {/* Campos de Prestador */}

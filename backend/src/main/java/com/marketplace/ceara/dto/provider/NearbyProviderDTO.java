@@ -7,6 +7,7 @@ import java.math.BigDecimal;
  * Inclui o cálculo da distância em quilômetros.
  */
 public record NearbyProviderDTO(
+    java.util.UUID id,
     String fullName,
     String category,
     BigDecimal ratingAverage,

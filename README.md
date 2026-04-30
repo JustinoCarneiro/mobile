@@ -41,7 +41,7 @@ chmod +x start-dev.sh
 ```
 
 A infraestrutura estará disponível em:
-*   **PostgreSQL:** `localhost:5432` (DB: `marketplace_ceara` | User: `marketplace`)
+*   **PostgreSQL:** `localhost:5433` (DB: `marketplace_ceara` | User: `marketplace`)
 *   **MinIO Console:** `http://localhost:9001` (User: `minioadmin` | Pass: `minioadmin123`)
 
 ### 2. Iniciar o Backend

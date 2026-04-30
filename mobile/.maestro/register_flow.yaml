@@ -1,0 +1,31 @@
+appId: host.exp.exponent
+---
+- tapOn: "Cadastre-se"
+- assertVisible: "Crie sua conta"
+
+- tapOn:
+    id: "register-name-input"
+- eraseText
+- inputText: "Joao QA"
+
+- tapOn:
+    id: "register-email-input"
+- eraseText
+- inputText: ${USER_EMAIL}
+
+- tapOn:
+    id: "register-cpf-input"
+- eraseText
+- inputText: ${USER_CPF}
+
+- tapOn:
+    id: "register-password-input"
+- eraseText
+- inputText: "12345678"
+
+- hideKeyboard
+
+- tapOn: "Cadastrar"
+
+- assertVisible: "Sucesso"
+- tapOn: "OK"

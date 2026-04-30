@@ -67,6 +67,7 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
+            testID="email-input"
           />
 
           <Input
@@ -76,6 +77,7 @@ export default function LoginScreen({ navigation }: { navigation: NavigationProp
             value={password}
             onChangeText={setPassword}
             isPassword
+            testID="password-input"
           />
 
           {/* Botão de Login */}

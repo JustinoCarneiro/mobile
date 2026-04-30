@@ -29,6 +29,7 @@ public class ProviderService {
         return providerProfileRepository.findNearby(lat, lng, category, radius)
                 .stream()
                 .map(p -> new NearbyProviderDTO(
+                        p.getId(),
                         p.getFullName(),
                         p.getCategory(),
                         p.getRatingAverage(),

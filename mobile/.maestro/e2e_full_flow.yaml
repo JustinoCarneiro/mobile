@@ -1,0 +1,7 @@
+appId: host.exp.exponent
+---
+- runFlow: register_flow.yaml
+
+- runFlow: login_flow.yaml
+
+- runFlow: create_service_flow.yaml

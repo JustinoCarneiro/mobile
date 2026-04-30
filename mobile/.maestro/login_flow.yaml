@@ -1,10 +1,17 @@
 appId: host.exp.exponent
 ---
-- launchApp
-- tapOn: "E-mail"
-- inputText: "joao.qa@e2e.com"
-- tapOn: "Senha"
-- inputText: "123456"
+- tapOn:
+    id: "email-input"
+- eraseText
+- inputText: ${USER_EMAIL}
+- tapOn:
+    id: "password-input"
+- eraseText
+- inputText: "12345678"
+- hideKeyboard
 - tapOn: "Entrar"
-- assertVisible: "Explorar"
-- assertVisible: "Encontre os melhores profissionais"
+
+- extendedWaitUntil:
+    visible: "O que você precisa hoje?"
+    timeout: 10000
+
